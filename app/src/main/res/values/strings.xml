@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">EXpenzo</string>
+    <string name="add_expense">Add Expense</string>
+    <string name="view_expenses">View Expenses</string>
+    <string name="amount">Amount</string>
+    <string name="category">Category</string>
+    <string name="note">Note</string>
+    <string name="save">Save</string>
+    <string name="filter_by_date">Filter by Date</string>
+    <string name="filter_by_category">Filter by Category</string>
+    <string name="clear_filters">Clear Filters</string>
+    <string name="help">Help</string>
+    <string name="contact">Contact Us</string>
+    <string name="settings">Settings</string>
+    <string name="theme">Theme</string>
+    <string name="light">Light</string>
+    <string name="dark">Dark</string>
+    <string name="system">System Default</string>
+    <string name="currency">Currency</string>
+
+    <string-array name="expense_categories">
+        <item>Food</item>
+        <item>Transportation</item>
+        <item>Housing</item>
+        <item>Entertainment</item>
+        <item>Shopping</item>
+        <item>Health</item>
+        <item>Education</item>
+        <item>Utilities</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="expense_categories_with_all">
+        <item>All</item>
+        <item>Food</item>
+        <item>Transportation</item>
+        <item>Housing</item>
+        <item>Entertainment</item>
+        <item>Shopping</item>
+        <item>Health</item>
+        <item>Education</item>
+        <item>Utilities</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="currencies">
+        <item>₹ INR</item>
+        <item>$ (USD)</item>
+        <item>€ (EUR)</item>
+        <item>£ (GBP)</item>
+        <item>¥ (JPY)</item>
+        <item>₹ (INR)</item>
+        <item>₩ (KRW)</item>
+        <item>₽ (RUB)</item>
+        <item>¥ (CNY)</item>
+        <item>$ (CAD)</item>
+        <item>$ (AUD)</item>
+    </string-array>
+
+    <string name="help_content">Welcome to Expense Tracker!\n\n
+    This app helps you track your daily expenses in a simple and efficient way.\n\n
+    <b>Main Screen:</b>\n
+    - The pie chart displays your expenses by category\n
+    - Total expense amount is shown at the top\n
+    - Use the Add Expense button to record new expenses\n
+    - Use the View Expenses button to see and edit your expense history\n\n
+    <b>Add Expense:</b>\n
+    - Enter the amount spent\n
+    - Select a category\n
+    - Add an optional note\n
+    - Press Save to record your expense\n\n
+    <b>View Expenses:</b>\n
+    - See all your recorded expenses in chronological order\n
+    - Filter by date or category using the filters at the top\n
+    - Tap on any expense to edit or delete it\n\n
+    <b>Settings:</b>\n
+    - Change the app theme (Light, Dark, or System Default)\n
+    - Change your preferred currency symbol</string>
+
+    <string name="contact_content">We value your feedback!\n\n
+    Email: support@expensetracker.com\n
+    Phone: +1-800-EXPENSE\n\n
+    Follow us on social media:\n
+    Twitter: @ExpenseTracker\n
+    Facebook: ExpenseTrackerApp\n
+    Instagram: @expense.tracker\n\n
+    © 2025 Expense Tracker App</string>
+</resources>
