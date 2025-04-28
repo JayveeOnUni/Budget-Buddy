@@ -39,10 +39,14 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // Apply theme before anything else
+        // Theme setup first
         prefs = getSharedPreferences("settings", MODE_PRIVATE);
-        int theme = prefs.getInt("theme", AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
-        AppCompatDelegate.setDefaultNightMode(theme);
+        String theme = prefs.getString("theme", "light");
+        if ("dark".equals(theme)) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -101,35 +105,27 @@ public class MainActivity extends AppCompatActivity {
         dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
 
         PieData data = new PieData(dataSet);
-
-        // Increase pie slice value text size
         data.setValueTextSize(14f);
 
         pieChart.setData(data);
-
         pieChart.getDescription().setEnabled(false);
-
-        // Set center text and increase its size
         pieChart.setCenterText("Expenses");
         pieChart.setCenterTextSize(24f);
         pieChart.setCenterTextColor(Color.BLACK);
-
         pieChart.animateY(1000);
         pieChart.invalidate();
 
-        // Get budget from prefs, default 0
+        // Budget calculations
         float budget = prefs.getFloat(PREF_BUDGET, 0f);
         float availableBalance = budget - totalExpenses;
 
-        // Format balance text
         String balanceText = String.format(Locale.getDefault(), "Balance: %s%.2f", currencySymbol, availableBalance);
         balanceTextView.setText(balanceText);
 
-        // Change color based on positive or negative balance
         if (availableBalance >= 0) {
-            balanceTextView.setTextColor(Color.parseColor("#388E3C")); // Green shade
+            balanceTextView.setTextColor(Color.parseColor("#388E3C"));
         } else {
-            balanceTextView.setTextColor(Color.parseColor("#D32F2F")); // Red shade
+            balanceTextView.setTextColor(Color.parseColor("#D32F2F"));
         }
     }
 
@@ -140,7 +136,6 @@ public class MainActivity extends AppCompatActivity {
         final EditText input = new EditText(this);
         input.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
 
-        // Pre-fill with current budget
         float currentBudget = prefs.getFloat(PREF_BUDGET, 0f);
         input.setText(String.format(Locale.getDefault(), "%.2f", currentBudget));
         input.setSelection(input.getText().length());
@@ -150,22 +145,15 @@ public class MainActivity extends AppCompatActivity {
         builder.setPositiveButton("Save", (dialog, which) -> {
             try {
                 float newBudget = Float.parseFloat(input.getText().toString());
-
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putFloat(PREF_BUDGET, newBudget);
-                editor.apply();
-
+                prefs.edit().putFloat(PREF_BUDGET, newBudget).apply();
                 Toast.makeText(this, "Budget updated!", Toast.LENGTH_SHORT).show();
-
                 updateChartAndBalance();
-
             } catch (NumberFormatException e) {
                 Toast.makeText(this, "Invalid amount", Toast.LENGTH_SHORT).show();
             }
         });
 
         builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
-
         builder.show();
     }
 

@@ -35,7 +35,7 @@
         <Spinner
             android:id="@+id/currency_spinner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginTop="8dp" />
 
         <Button
@@ -44,7 +44,28 @@
             android:layout_height="wrap_content"
             android:text="Export Expenses by Date"
             android:layout_marginTop="24dp" />
+        <TextView
+            android:id="@+id/theme_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Theme"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="8dp"
+            android:layout_gravity="left" />
+
+        <Button
+            android:id="@+id/btnLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Light" />
+
+        <Button
+            android:id="@+id/btnDark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dark" />
 
     </LinearLayout>
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

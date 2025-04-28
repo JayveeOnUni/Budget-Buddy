@@ -12,6 +12,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -24,6 +25,7 @@ public class SettingsActivity extends AppCompatActivity {
     private Spinner currencySpinner;
     private SharedPreferences preferences;
     private ExpenseDatabase expenseDb;
+    private Button btnLight, btnDark;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,15 +43,62 @@ public class SettingsActivity extends AppCompatActivity {
         preferences = getSharedPreferences("settings", MODE_PRIVATE);
         expenseDb = new ExpenseDatabase(this);
 
+        // Initialize all UI components
         currencySpinner = findViewById(R.id.currency_spinner);
+        btnLight = findViewById(R.id.btnLight);
+        btnDark = findViewById(R.id.btnDark);
 
-        // Populate currency spinner with symbols
+        // Load saved theme preference
+        loadThemePreference();
+
+        // Setup theme toggle buttons
+        setupThemeButtons();
+
+        // Currency spinner setup
+        setupCurrencySpinner();
+
+        // Export button
+        Button exportButton = findViewById(R.id.export_expenses_btn);
+        exportButton.setOnClickListener(v -> showDatePickerDialog());
+    }
+
+    private void loadThemePreference() {
+        String theme = preferences.getString("theme", "light");
+        if (theme.equals("dark")) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+    }
+
+    private void setupThemeButtons() {
+        btnLight.setOnClickListener(v -> {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            saveThemePreference("light");
+            Toast.makeText(this, "Theme set to Light !", Toast.LENGTH_SHORT).show();
+            recreate();
+        });
+
+        btnDark.setOnClickListener(v -> {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            saveThemePreference("dark");
+            Toast.makeText(this, "Theme set to Dark !", Toast.LENGTH_SHORT).show();
+            recreate();
+        });
+    }
+
+    private void saveThemePreference(String theme) {
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("theme", theme);
+        editor.apply();
+    }
+
+    private void setupCurrencySpinner() {
         String[] currencies = {"₹", "$", "€", "£", "¥"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, currencies);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         currencySpinner.setAdapter(adapter);
 
-        // Set spinner selection based on saved preference
         String savedCurrency = preferences.getString("currency", "₹");
         int selectedIndex = 0;
         for (int i = 0; i < currencies.length; i++) {
@@ -60,7 +109,6 @@ public class SettingsActivity extends AppCompatActivity {
         }
         currencySpinner.setSelection(selectedIndex);
 
-        // Save currency on selection change
         currencySpinner.setOnItemSelectedListener(new android.widget.AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(android.widget.AdapterView<?> parent, android.view.View view, int position, long id) {
@@ -73,13 +121,8 @@ public class SettingsActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(android.widget.AdapterView<?> parent) {
-                // Do nothing
             }
         });
-
-        // Add Export Expenses button
-        Button exportButton = findViewById(R.id.export_expenses_btn);
-        exportButton.setOnClickListener(v -> showDatePickerDialog());
     }
 
     private void showDatePickerDialog() {
@@ -96,12 +139,10 @@ public class SettingsActivity extends AppCompatActivity {
                 calendar.get(Calendar.MONTH),
                 calendar.get(Calendar.DAY_OF_MONTH)
         );
-
         datePickerDialog.show();
     }
 
     private void exportExpensesByDate(Date date) {
-        // Fetch expenses for the selected date
         List<Expense> expenses = expenseDb.getExpensesByDate(date);
 
         if (expenses.isEmpty()) {
@@ -109,7 +150,6 @@ public class SettingsActivity extends AppCompatActivity {
             return;
         }
 
-        // Build a simple string summary (you can extend to CSV or file export)
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
         StringBuilder sb = new StringBuilder();
         sb.append("Expenses for ").append(sdf.format(date)).append(":\n\n");
@@ -125,7 +165,6 @@ public class SettingsActivity extends AppCompatActivity {
         }
         sb.append("\nTotal: ").append(preferences.getString("currency", "₹")).append(String.format(Locale.getDefault(), "%.2f", total));
 
-        // Show in alert dialog
         new androidx.appcompat.app.AlertDialog.Builder(this)
                 .setTitle("Exported Expenses")
                 .setMessage(sb.toString())
@@ -135,7 +174,6 @@ public class SettingsActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // No theme menu, so no inflation needed here
         return true;
     }
 
