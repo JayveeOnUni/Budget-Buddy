@@ -4,6 +4,9 @@
 Expenzo is a simple and user-friendly Android app developed using Java and XML that helps users track their daily personal expenses, set budgets, and monitor spending habits. It is designed especially for college students and beginners who want an efficient way to manage their finances on the go.
 
 
+
+https://github.com/user-attachments/assets/6b787f23-dfb0-4802-9759-898c18e896e6
+
 ![Image](https://github.com/user-attachments/assets/91c5779d-67b0-4a9d-a3e2-4e9e15ad8c43)
 
 
