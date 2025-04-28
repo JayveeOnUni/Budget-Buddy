@@ -13,7 +13,7 @@ Expenzo is a simple and user-friendly Android app developed using Java and XML t
 ![Image](https://github.com/user-attachments/assets/d6f7a61a-182d-4787-89c8-c947d0e3d024)
 
 
-![Image](https://github.com/user-attachments/assets/e8e28f2e-a8dc-4e86-a4b8-938a9a1448a7)
+![Image](https://github.com/user-attachments/assets/df0dc5de-fe94-4cb8-b7cc-7fd21fcf5a5a)
 
 
 ## Features
