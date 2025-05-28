@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">EXpenzo</string>
+    <string name="app_name">Budget Buddy</string>
     <string name="add_expense">Add Expense</string>
     <string name="view_expenses">View Expenses</string>
     <string name="amount">Amount</string>
@@ -45,20 +45,18 @@
     </string-array>
 
     <string-array name="currencies">
-        <item>₹ INR</item>
+        <item>₱ (PHP)</item>
         <item>$ (USD)</item>
         <item>€ (EUR)</item>
-        <item>£ (GBP)</item>
         <item>¥ (JPY)</item>
         <item>₹ (INR)</item>
-        <item>₩ (KRW)</item>
         <item>₽ (RUB)</item>
         <item>¥ (CNY)</item>
         <item>$ (CAD)</item>
         <item>$ (AUD)</item>
     </string-array>
 
-    <string name="help_content">Welcome to Expense Tracker!\n\n
+    <string name="help_content">Welcome to Budget Buddy!\n\n
     This app helps you track your daily expenses in a simple and efficient way.\n\n
     <b>Main Screen:</b>\n
     - The pie chart displays your expenses by category\n
@@ -79,11 +77,11 @@
     - Change your preferred currency symbol</string>
 
     <string name="contact_content">We value your feedback!\n\n
-    Email: support@expensetracker.com\n
-    Phone: +1-800-EXPENSE\n\n
+    Email: support@budgetbuddy.com\n
+    Phone: +1-800-BUDDY\n\n
     Follow us on social media:\n
-    Twitter: @ExpenseTracker\n
-    Facebook: ExpenseTrackerApp\n
-    Instagram: @expense.tracker\n\n
-    © 2025 Expense Tracker App</string>
+    Twitter: @BudgetBuddy\n
+    Facebook: BudgetBuddyApp\n
+    Instagram: @budget.buddy\n\n
+    © 2025 Budget Buddy App</string>
 </resources>

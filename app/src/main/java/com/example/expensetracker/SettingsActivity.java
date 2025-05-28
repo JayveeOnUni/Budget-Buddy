@@ -104,12 +104,12 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void setupCurrencySpinner() {
-        String[] currencies = {"₹", "$", "€", "£", "¥"};
+        String[] currencies = {"₱", "$", "€", "£", "¥"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, currencies);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         currencySpinner.setAdapter(adapter);
 
-        String savedCurrency = preferences.getString("currency", "₹");
+        String savedCurrency = preferences.getString("currency", "₱");
         int selectedIndex = 0;
         for (int i = 0; i < currencies.length; i++) {
             if (currencies[i].equals(savedCurrency)) {

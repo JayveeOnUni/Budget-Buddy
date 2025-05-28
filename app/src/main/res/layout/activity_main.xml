@@ -29,14 +29,14 @@
             android:id="@+id/balance_text"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
-            android:text="Balance: ₹0.00"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/black"
-            android:layout_marginTop="16dp"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
             android:clickable="true"
-            android:focusable="true" />
+            android:focusable="true"
+            android:text="Balance: ₱0.00"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <!-- PieChart below balance text -->
         <com.github.mikephil.charting.charts.PieChart

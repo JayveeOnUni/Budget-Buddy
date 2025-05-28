@@ -51,11 +51,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Sets up toolbar.
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        currencySymbol = prefs.getString("currency", "₹"); // Default to Rupee symbol
+        //Retrieves currency symbol from shared preferences (default: ₱).
+        currencySymbol = prefs.getString("currency", "₱"); //
 
+        // Initializes database and UI elements (PieChart, Balance TextView).
         expenseDb = new ExpenseDatabase(this);
 
         pieChart = findViewById(R.id.expense_chart);
@@ -102,7 +105,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         PieDataSet dataSet = new PieDataSet(entries, "Expense Categories");
-        dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+        List<Integer> colors = new ArrayList<>();
+        for (int c : ColorTemplate.MATERIAL_COLORS) colors.add(c);
+        for (int c : ColorTemplate.PASTEL_COLORS) colors.add(c);
+
+        dataSet.setColors(colors);
 
         PieData data = new PieData(dataSet);
         data.setValueTextSize(14f);
@@ -119,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
         float budget = prefs.getFloat(PREF_BUDGET, 0f);
         float availableBalance = budget - totalExpenses;
 
-        String balanceText = String.format(Locale.getDefault(), "Balance: %s%.2f", currencySymbol, availableBalance);
+        String balanceText = String.format(Locale.getDefault(), "Balance: %s%,.2f", currencySymbol, availableBalance);
         balanceTextView.setText(balanceText);
 
         if (availableBalance >= 0) {
@@ -137,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
         input.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
 
         float currentBudget = prefs.getFloat(PREF_BUDGET, 0f);
-        input.setText(String.format(Locale.getDefault(), "%.2f", currentBudget));
+        input.setText(String.format(Locale.getDefault(), "%,.2f", currentBudget));
         input.setSelection(input.getText().length());
 
         builder.setView(input);

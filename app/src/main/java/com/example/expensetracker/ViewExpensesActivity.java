@@ -133,7 +133,7 @@ public class ViewExpensesActivity extends AppCompatActivity {
         Collections.sort(months, new MonthComparator()); // Sort months descending
 
         SharedPreferences prefs = getSharedPreferences("settings", MODE_PRIVATE);
-        String currency = prefs.getString("currency", "₹"); // Default to Rupee
+        String currency = prefs.getString("currency", "₱");
 
         for (String month : months) {
             List<Expense> specificMonthExpenses = groupedExpenses.get(month);
@@ -142,7 +142,7 @@ public class ViewExpensesActivity extends AppCompatActivity {
                 monthTotal += expense.getAmount();
             }
 
-            String headerText = month + " (Total: " + currency + String.format(Locale.getDefault(), "%.2f", monthTotal) + ")";
+            String headerText = month + " (Total: " + currency + String.format(Locale.getDefault(), "%,.2f", monthTotal) + ")";
             listItems.add(new ExpandableExpenseAdapter.ListItem(ExpandableExpenseAdapter.TYPE_HEADER, headerText));
 
             grandTotal += monthTotal;
@@ -155,7 +155,7 @@ public class ViewExpensesActivity extends AppCompatActivity {
             }
         }
 
-        totalExpensesHeader.setText("Total Expenses: " + currency + String.format(Locale.getDefault(), "%.2f", grandTotal));
+        totalExpensesHeader.setText("Total Expenses: " + currency + String.format(Locale.getDefault(), "%,.2f", grandTotal));
 
         adapter = new ExpandableExpenseAdapter(listItems, expenseDb, this::loadExpensesByMonth);
         recyclerView.setAdapter(adapter);
